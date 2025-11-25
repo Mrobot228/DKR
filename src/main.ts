@@ -1,6 +1,5 @@
 import { NestFactory } from '@nestjs/core';
 import { Logger, ValidationPipe } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
@@ -22,10 +21,10 @@ async function bootstrap() {
   // Enable CORS
   app.enableCors();
 
-  const configService = app.get(ConfigService);
-  const port = configService.get<number>('PORT', 3000);
+  // Railway встановлює PORT автоматично
+  const port = process.env.PORT || 3000;
 
-  await app.listen(port);
+  await app.listen(port, '0.0.0.0');
   
   logger.log(`🚀 Сервер запущено на порті ${port}`);
   logger.log(`🤖 Telegram бот успішно запущено!`);
@@ -35,7 +34,3 @@ bootstrap().catch((error) => {
   console.error('Помилка запуску:', error);
   process.exit(1);
 });
-
-
-
-
