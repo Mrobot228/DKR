@@ -7,15 +7,14 @@ exports.databaseConfig = {
     inject: [config_1.ConfigService],
     useFactory: (configService) => ({
         type: 'postgres',
-        host: configService.get('DB_HOST', 'localhost'),
-        port: configService.get('DB_PORT', 5432),
-        username: configService.get('DB_USERNAME', 'postgres'),
-        password: configService.get('DB_PASSWORD', 'password'),
-        database: configService.get('DB_NAME', 'post_office_bot'),
+        url: configService.get('DATABASE_URL'),
         entities: [__dirname + '/../database/entities/*.entity{.ts,.js}'],
         synchronize: true,
         logging: configService.get('NODE_ENV') === 'development',
         autoLoadEntities: true,
+        ssl: configService.get('NODE_ENV') === 'production'
+            ? { rejectUnauthorized: false }
+            : false,
     }),
 };
 //# sourceMappingURL=database.config.js.map
