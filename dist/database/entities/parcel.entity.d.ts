@@ -1,0 +1,33 @@
+import { User } from './user.entity';
+import { PostOffice } from './post-office.entity';
+import { ParcelStatusHistory } from './parcel-status-history.entity';
+import { ParcelStatus } from '../../constants/parcel-status.enum';
+export declare class Parcel {
+    id: number;
+    trackingNumber: string;
+    sender: User;
+    senderTelegramId: number;
+    senderName: string;
+    senderPhone: string;
+    senderCity: string;
+    senderAddress: string;
+    senderOffice: PostOffice;
+    senderOfficeId: number;
+    recipientName: string;
+    recipientPhone: string;
+    recipientCity: string;
+    recipientAddress: string;
+    recipientOffice: PostOffice;
+    recipientOfficeId: number;
+    description: string;
+    weight: number;
+    declaredValue: number;
+    deliveryType: string;
+    deliveryCost: number;
+    currentStatus: ParcelStatus;
+    statusHistory: ParcelStatusHistory[];
+    createdAt: Date;
+    updatedAt: Date;
+    get formattedTrackingNumber(): string;
+    get isActive(): boolean;
+}

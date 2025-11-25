@@ -1,0 +1,9 @@
+export declare const validatePhone: (phone: string) => boolean;
+export declare const normalizePhone: (phone: string) => string;
+export declare const validateTrackingNumber: (number: string) => boolean;
+export declare const formatTrackingNumber: (number: string) => string;
+export declare const validateWeight: (weight: number) => boolean;
+export declare const validateDeclaredValue: (value: number) => boolean;
+export declare const formatDate: (date: Date) => string;
+export declare const formatDateTime: (date: Date) => string;
+export declare const formatMoney: (amount: number) => string;
