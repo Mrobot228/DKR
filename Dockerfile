@@ -3,19 +3,20 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-# Копіюємо файли залежностей
+# Копіюємо файли залежностей та конфігурації
 COPY package*.json ./
+COPY tsconfig*.json ./
 
-# Встановлюємо ВСІ залежності (включаючи dev для збірки)
+# Встановлюємо ВСІ залежності
 RUN npm ci
 
 # Копіюємо вихідний код
-COPY . .
+COPY src ./src
 
-# Збираємо проект через npx
-RUN npx nest build
+# Збираємо проект через tsc (вже налаштовано в package.json)
+RUN npm run build
 
-# Production stage
+# Production stage  
 FROM node:20-alpine
 
 WORKDIR /app
@@ -29,7 +30,7 @@ RUN npm ci --omit=dev
 # Копіюємо зібраний код
 COPY --from=builder /app/dist ./dist
 
-# Порт (Railway автоматично встановлює PORT)
+# Порт
 EXPOSE 3000
 
 # Запуск

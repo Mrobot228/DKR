@@ -87,3 +87,4 @@ export const DistanceRatePer100Km = 5; // грн за 100 км
 
 
 
+
